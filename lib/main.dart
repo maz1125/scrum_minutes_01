@@ -129,7 +129,7 @@ class ListViewSampleState extends State<ListViewSample>{
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-        title: Text('Startup Name Generator2'),
+        title: Text('Startup Name Generator3'),
     ),
     body: _buildSuggestions(),
     );}
@@ -148,10 +148,24 @@ class ListViewSampleState extends State<ListViewSample>{
   }
   Widget _buildRow(WordPair pair) {
     return ListTile(
-      title: Text(
-        pair.asPascalCase,
-        style: _biggerFont,
-      ),
+        leading: Icon(Icons.local_shipping),
+    title: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: <Widget>[
+    Text(pair.asPascalCase, style: _biggerFont),
+    Container( color: Colors.green, width: 30, height:30 ),
+    ]) ,
+    // title: ,
+    onTap: () {
+      print("onTap called.");
+    },
     );
   }
+
+  // Widget listItem extends StatefulWidget(){
+  //   @override
+  //   Widget build(BuildContext context) {
+  //     return
+  //   }
+  // }
 }

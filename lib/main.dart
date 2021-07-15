@@ -122,17 +122,20 @@ class ListViewSample extends StatefulWidget {
   ListViewSampleState createState() => ListViewSampleState();
 }
 
-class ListViewSampleState extends State<ListViewSample>{
+class ListViewSampleState extends State<ListViewSample> {
   final _suggestions = <WordPair>[];
   final _biggerFont = const TextStyle(fontSize: 18.0);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
+      appBar: AppBar(
         title: Text('Startup Name Generator3'),
-    ),
-    body: _buildSuggestions(),
-    );}
+      ),
+      body: _buildSuggestions(),
+    );
+  }
+
   Widget _buildSuggestions() {
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
@@ -143,29 +146,53 @@ class ListViewSampleState extends State<ListViewSample>{
           if (index >= _suggestions.length) {
             _suggestions.addAll(generateWordPairs().take(10));
           }
-          return _buildRow(_suggestions[index]);
+          // return _buildRow(_suggestions[index]);
+          return ListItem();
         });
   }
+
   Widget _buildRow(WordPair pair) {
     return ListTile(
-        leading: Icon(Icons.local_shipping),
-    title: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: <Widget>[
-    Text(pair.asPascalCase, style: _biggerFont),
-    Container( color: Colors.green, width: 30, height:30 ),
-    ]) ,
-    // title: ,
-    onTap: () {
-      print("onTap called.");
-    },
+      leading: Icon(Icons.local_shipping),
+      title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text(pair.asPascalCase, style: _biggerFont),
+            Container(color: Colors.green, width: 30, height: 30),
+          ]),
+      // title: ,
+      onTap: () {
+        print("onTap called.");
+      },
     );
   }
+}
 
-  // Widget listItem extends StatefulWidget(){
-  //   @override
-  //   Widget build(BuildContext context) {
-  //     return
-  //   }
-  // }
+class ListItem extends StatefulWidget{
+  @override
+  _ClickListItem createState() => _ClickListItem();
+}
+
+class _ClickListItem extends State<ListItem> {
+  bool _active = false;
+
+  void _handleTap() {
+    setState(() {
+      _active = !_active;
+    });
+  }
+  Widget build(BuildContext context) {
+    final _biggerFont = const TextStyle(fontSize: 18.0);
+    return ListTile(
+      leading: Icon(Icons.local_shipping),
+      title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text("hogehoge", style: _biggerFont),
+            Container( color: _active ? Colors.green : Colors.red, width: 30, height:30 ),
+          ]) ,
+        // title: ,
+      onTap: _handleTap,
+    );
+  }
 }
